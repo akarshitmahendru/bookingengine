@@ -74,3 +74,29 @@ class BookingInfo(models.Model):
             obj = self.hotel_room_type
             
         return f'{obj} {self.price}'
+
+
+"""
+Reserving Apartment/Hotel Changes by Akarshit Mahendru
+"""
+
+
+class ReservationModel(models.Model):
+    room = models.ForeignKey(
+        HotelRoomType,
+        on_delete=models.CASCADE,
+        related_name='reserved_room',
+
+    )
+    hotel = models.ForeignKey(
+        Listing,
+        on_delete=models.CASCADE,
+        related_name='reserved_type'
+    )
+    check_in_date = models.DateField()
+    check_out_date = models.DateField()
+
+    def __str__(self):
+        return f"{self.hotel.title} => {self.room.title}"
+
+
